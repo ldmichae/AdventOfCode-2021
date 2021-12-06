@@ -69,7 +69,7 @@ print(f'Result: {oxygen * carbon}')
 
 
 # %%
-readings = [
+test_values = [
 '00100',
 '11110',
 '10110',
