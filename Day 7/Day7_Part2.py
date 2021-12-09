@@ -14,6 +14,7 @@ res = {}
 for i in range(0,max(readings)):
     running_total = 0
     for j in readings:
-        running_total += abs(j - i)
+        running_total += sum(range(0, 1 + max(i,j) - min(i,j)))
     res[i] = running_total
 # %%
+print(min(res.values()))
