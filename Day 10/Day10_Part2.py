@@ -6,7 +6,7 @@ with open('day10-data.txt', 'r') as file:
     lines = file.readlines();   
     for line in lines:
         data.append(list(line.strip('\n')))
-# %%
+
 scoring = {')':1,']':2,'}':3,'>':4}
 
 pairs = {'}':'{',')':'(',']':'[','>':'<'}
@@ -35,6 +35,3 @@ for sample in data:
         scores.append(score)
 
 result = statistics.median(scores)
-# %%
-
-# %%
