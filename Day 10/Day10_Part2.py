@@ -1,36 +1,40 @@
 # %%
+import statistics
+
 data = []
 with open('day10-data.txt', 'r') as file:
     lines = file.readlines();   
     for line in lines:
         data.append(list(line.strip('\n')))
-
-scoring = {')':3,']':57,'}':1197,'>':25137}
+# %%
+scoring = {')':1,']':2,'}':3,'>':4}
 
 pairs = {'}':'{',')':'(',']':'[','>':'<'}
 rev_pairs = {v:k for k,v in pairs.items()}
 
-unclosed = []
-score = 0
+scores = []
 for sample in data:
+    score = 0
+    unclosed = []
+    error = False
     for idx, char in enumerate(sample):
-        # print("=========================================")
-        # print("")
-        # print(f"Unclosed: {unclosed}")
-        # print(f"Analyzing {char}")
         if char in list(pairs.values()):
-            # print(f"Adding {char} to unclosed")
             unclosed.append(char)
         else:
             if pairs[char] != unclosed[-1]:
-                # print(''.join(test[:(idx + 1)]))
-                # print(f"Error! Found '{char}' at index {idx}, expected '{rev_pairs[unclosed[-1]]}'")
                 score += scoring[char]
-                break
+                error = True
             else:
-                # print(f"Removing {pairs[char]} from unclosed")
                 unclosed = unclosed[:-1]
+    if error:
+        pass
+    else:
+        completion_extension = unclosed[::-1]
+        for i in completion_extension:
+            score = (score * 5) + scoring[rev_pairs[i]]
+        scores.append(score)
 
+result = statistics.median(scores)
 # %%
 
 # %%
